@@ -1,0 +1,12 @@
+{
+  "name": "batman-github-action",
+  "version": "1.0.0",
+  "description": "Github action used to retrived coding time by day & by night",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "douze <douze@users.noreply.github.com>",
+  "license": "MIT"
+}
