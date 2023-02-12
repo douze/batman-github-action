@@ -4,7 +4,7 @@
   "description": "Github action used to retrived coding time by day & by night",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "lint": "eslint ."
   },
   "keywords": [],
@@ -13,7 +13,9 @@
   "devDependencies": {
     "eslint": "^7.32.0 || ^8.2.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.25.2"
+    "eslint-plugin-import": "^2.25.2",
+    "mocha": "^10.2.0",
+    "sinon": "^15.0.1"
   },
   "dependencies": {
     "@octokit/rest": "^19.0.7"

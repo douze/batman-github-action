@@ -3,6 +3,7 @@ module.exports = {
     commonjs: true,
     es2021: true,
     node: true,
+    mocha: true,
   },
   extends: 'airbnb-base',
   overrides: [
@@ -11,5 +12,7 @@ module.exports = {
     ecmaVersion: 'latest',
   },
   rules: {
+    // Disable 'ForOfStatement' from airbnb
+    'no-restricted-syntax': ['error', 'ForInStatement', 'LabeledStatement', 'WithStatement'],
   },
 };
