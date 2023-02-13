@@ -636,12 +636,12 @@
     "node_id": "MDY6Q29tbWl0NDk0MzkwMTQyOmEwOWRiZTJhOWI2ZjIwNDY4MmZhYTFmY2E3OTM1YjhkNWQ4Zjg3NTY=",
     "commit": {
       "author": {
-        "name": "douze",
+        "name": "not_douze",
         "email": "douze@users.noreply.github.com",
         "date": "2021-01-22T20:58:19Z"
       },
       "committer": {
-        "name": "douze",
+        "name": "not_douze",
         "email": "douze@users.noreply.github.com",
         "date": "2021-01-22T20:58:19Z"
       },
@@ -663,7 +663,7 @@
     "html_url": "https://github.com/douze/odo/commit/a09dbe2a9b6f204682faa1fca7935b8d5d8f8756",
     "comments_url": "https://api.github.com/repos/douze/odo/commits/a09dbe2a9b6f204682faa1fca7935b8d5d8f8756/comments",
     "author": {
-      "login": "douze",
+      "login": "not_douze",
       "id": 7696197,
       "node_id": "MDQ6VXNlcjc2OTYxOTc=",
       "avatar_url": "https://avatars.githubusercontent.com/u/7696197?v=4",
@@ -683,7 +683,7 @@
       "site_admin": false
     },
     "committer": {
-      "login": "douze",
+      "login": "not_douze",
       "id": 7696197,
       "node_id": "MDQ6VXNlcjc2OTYxOTc=",
       "avatar_url": "https://avatars.githubusercontent.com/u/7696197?v=4",
@@ -715,12 +715,12 @@
     "node_id": "MDY6Q29tbWl0NDk0MzkwMTQyOmEyZDcxZDdlM2FkYzIzZTZiZmUxZWQ4ZjI2Njk1YWQ4MmIwNWU2NTU=",
     "commit": {
       "author": {
-        "name": "douze",
+        "name": "not_douze",
         "email": "douze@users.noreply.github.com",
         "date": "2021-01-20T14:42:52Z"
       },
       "committer": {
-        "name": "douze",
+        "name": "not_douze",
         "email": "douze@users.noreply.github.com",
         "date": "2021-01-20T14:42:52Z"
       },
@@ -742,7 +742,7 @@
     "html_url": "https://github.com/douze/odo/commit/a2d71d7e3adc23e6bfe1ed8f26695ad82b05e655",
     "comments_url": "https://api.github.com/repos/douze/odo/commits/a2d71d7e3adc23e6bfe1ed8f26695ad82b05e655/comments",
     "author": {
-      "login": "douze",
+      "login": "not_douze",
       "id": 7696197,
       "node_id": "MDQ6VXNlcjc2OTYxOTc=",
       "avatar_url": "https://avatars.githubusercontent.com/u/7696197?v=4",
@@ -762,7 +762,7 @@
       "site_admin": false
     },
     "committer": {
-      "login": "douze",
+      "login": "not_douze",
       "id": 7696197,
       "node_id": "MDQ6VXNlcjc2OTYxOTc=",
       "avatar_url": "https://avatars.githubusercontent.com/u/7696197?v=4",
