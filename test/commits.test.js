@@ -10,18 +10,18 @@ async function getFirst10Commits() {
   return JSON.parse(await fs.readFile('./test/douze.odo.commits.10.json', 'utf8'));
 }
 
-describe('Commits module (stubed)', () => {
+describe('Commits module', () => {
   beforeEach(() => {
     sinon.stub(commitsModule, 'getAllCommits').callsFake(getFirst10Commits);
   });
   afterEach(() => {
     sinon.restore();
   });
-  it('Should return first 10 commits by default', async () => {
+  it('Should return first 10 commits when stubing', async () => {
     const commits = await commitsModule.getAllCommits(owner, repo);
     assert.equal(commits.length, 10);
   });
-  it('Should return 8 commits when filtered', async () => {
+  it('Should return 8 commits when filtering', async () => {
     const commits = await getFirst10Commits();
     const filteredCommits = commitsModule.extractDates(commits, owner);
     assert.equal(filteredCommits.length, 8);
