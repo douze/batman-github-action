@@ -8,6 +8,11 @@ const DaysOfTheWeek = Object.freeze({
   SATURDAY: Symbol('Saturday'),
 });
 
+const DayNight = Object.freeze({
+  DAY: Symbol('Day'),
+  NIGHT: Symbol('Night'),
+});
+
 const convertToDaysOfTheWeek = (dates) => (
   dates
     .map((date) => new Date(date).getDay())
@@ -21,4 +26,22 @@ const countDaysOfTheWeek = (daysOfTheWeek) => (
   }, {}));
 /* eslint-enable no-param-reassign */
 
-module.exports = { DaysOfTheWeek, convertToDaysOfTheWeek, countDaysOfTheWeek };
+const convertToHours = (dates) => dates.map((date) => new Date(date).getHours());
+
+/* eslint-disable no-param-reassign */
+const storeInDayNightSlots = (hours, dayStart, dayEnd) => (
+  hours.reduce((slots, value) => {
+    const key = dayStart <= value && value < dayEnd ? DayNight.DAY : DayNight.NIGHT;
+    slots[key] = slots[key] + 1 || 1;
+    return slots;
+  }, { [DayNight.DAY]: 0, [DayNight.NIGHT]: 0 }));
+/* eslint-enable no-param-reassign */
+
+module.exports = {
+  DaysOfTheWeek,
+  DayNight,
+  convertToDaysOfTheWeek,
+  countDaysOfTheWeek,
+  convertToHours,
+  storeInDayNightSlots,
+};
