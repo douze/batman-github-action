@@ -31,10 +31,13 @@ const countDaysOfTheWeek = (daysOfTheWeek) => (
 
 const convertDatesToHours = (dates) => dates.map((date) => new Date(date).getHours());
 
+const hourToDayNightKey = (hour, dayStart, dayEnd) => (
+  dayStart <= hour && hour < dayEnd ? DayNight.DAY : DayNight.NIGHT);
+
 /* eslint-disable no-param-reassign */
 const countAsDayNightSlots = (hours, localDayStart, localDayEnd) => (
   hours.reduce((slots, hour) => {
-    const key = localDayStart <= hour && hour < localDayEnd ? DayNight.DAY : DayNight.NIGHT;
+    const key = hourToDayNightKey(hour, localDayStart, localDayEnd);
     slots[key] = slots[key] + 1 || 1;
     return slots;
   }, { [DayNight.DAY]: 0, [DayNight.NIGHT]: 0 }));
@@ -55,6 +58,17 @@ const groupHoursByDaysOfTheWeek = (dates) => (
   }, {}));
 /* eslint-enable no-param-reassign */
 
+/* eslint-disable no-param-reassign */
+const groupHoursByDaysOfTheWeekAndDayNightSlots = (dates, localDayStart, localDayEnd) => (
+  dates.reduce((group, date) => {
+    const { dayOfTheWeek, hour } = extractDayOfTheWeekAndHour(date);
+    group[dayOfTheWeek] = group[dayOfTheWeek] || { [DayNight.DAY]: [], [DayNight.NIGHT]: [] };
+    const dayNightKey = hourToDayNightKey(hour, localDayStart, localDayEnd);
+    group[dayOfTheWeek][dayNightKey].push(hour);
+    return group;
+  }, {}));
+/* eslint-enable no-param-reassign */
+
 module.exports = {
   DaysOfTheWeek,
   DayNight,
@@ -63,4 +77,5 @@ module.exports = {
   convertDatesToHours,
   countAsDayNightSlots,
   groupHoursByDaysOfTheWeek,
+  groupHoursByDaysOfTheWeekAndDayNightSlots,
 };
