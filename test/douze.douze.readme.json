@@ -1,0 +1,18 @@
+{
+    "name": "README.md",
+    "path": "README.md",
+    "sha": "138dace88d452ce44c72c5ddd024b2800a064ec2",
+    "size": 437,
+    "url": "https: //api.github.com/repos/douze/douze/contents/README.md?ref=main",
+    "html_url": "https: //github.com/douze/douze/blob/main/README.md",
+    "git_url": "https: //api.github.com/repos/douze/douze/git/blobs/138dace88d452ce44c72c5ddd024b2800a064ec2",
+    "download_url": "https: //raw.githubusercontent.com/douze/douze/main/README.md?token=AB2W6RN3EO3PD67COTFSI3LEAHHMA",
+    "type": "file",
+    "content": "IyMjIEhpIHRoZXJlIPCfkYsKCjwhLS0KKipkb3V6ZS9kb3V6ZSoqIGlzIGEg4pyoIF9zcGVjaWFsXyDinKggcmVwb3NpdG9yeSBiZWNhdXNlIGl0cyBgUkVBRE1FLm1kYCAodGhpcyBmaWxlKSBhcHBlYXJzIG9uIHlvdXIgR2l0SHViIHByb2ZpbGUuCgpIZXJlIGFyZSBzb21lIGlkZWFzIHRvIGdldCB5b3Ugc3RhcnRlZDoKCi0g8J+UrSBJ4oCZbSBjdXJyZW50bHkgd29ya2luZyBvbiAuLi4KLSDwn4yxIEnigJltIGN1cnJlbnRseSBsZWFybmluZyAuLi4KLSDwn5GvIEnigJltIGxvb2tpbmcgdG8gY29sbGFib3JhdGUgb24gLi4uCi0g8J+klCBJ4oCZbSBsb29raW5nIGZvciBoZWxwIHdpdGggLi4uCi0g8J+SrCBBc2sgbWUgYWJvdXQgLi4uCi0g8J+TqyBIb3cgdG8gcmVhY2ggbWU6IC4uLgotIPCfmIQgUHJvbm91bnM6IC4uLgotIOKaoSBGdW4gZmFjdDogLi4uCi0tPgo=",
+    "encoding": "base64",
+    "_links": {
+      "self": "https: //api.github.com/repos/douze/douze/contents/README.md?ref=main",
+      "git": "https: //api.github.com/repos/douze/douze/git/blobs/138dace88d452ce44c72c5ddd024b2800a064ec2",
+      "html": "https: //github.com/douze/douze/blob/main/README.md"
+  }
+}
