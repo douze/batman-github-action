@@ -5,6 +5,11 @@ const commitsModule = require('../src/commits');
 
 const owner = 'douze';
 const repo = 'odo';
+const mockRestApi = true;
+
+async function getFirst5Repos() {
+  return ['dotfiles', 'estm', 'odo', 'Viewer', 'wade'];
+}
 
 async function getFirst10Commits() {
   return JSON.parse(await fs.readFile('./test/douze.odo.commits.10.json', 'utf8'));
@@ -12,14 +17,47 @@ async function getFirst10Commits() {
 
 describe('Commits module', () => {
   beforeEach(() => {
-    sinon.stub(commitsModule, 'getAllCommits').callsFake(getFirst10Commits);
+    if (mockRestApi) {
+      sinon.stub(commitsModule, 'getAllRepos').callsFake(getFirst5Repos);
+      sinon.stub(commitsModule, 'getAllCommits').callsFake(getFirst10Commits);
+    }
   });
   afterEach(() => {
-    sinon.restore();
+    if (mockRestApi) {
+      sinon.restore();
+    }
   });
-  it('Should return first 10 commits when stubing', async () => {
-    const commits = await commitsModule.getAllCommits(owner, repo);
-    assert.equal(commits.length, 10);
+  it('Should return the list of my repos', async function () {
+    if (mockRestApi) {
+      this.skip();
+    } else {
+      const repos = await commitsModule.getAllRepos(owner);
+      assert.ok(repos.length > 0);
+    }
+  });
+  it('Should return first 5 repos when stubing', async function () {
+    if (mockRestApi) {
+      const repos = await commitsModule.getAllRepos(owner);
+      assert.equal(repos.length, 5);
+    } else {
+      this.skip();
+    }
+  });
+  it('Should return the list of commits for odo repo', async function () {
+    if (mockRestApi) {
+      this.skip();
+    } else {
+      const commits = await commitsModule.getAllCommits(owner, repo);
+      assert.ok(commits.length > 0);
+    }
+  });
+  it('Should return first 10 commits when stubing', async function () {
+    if (mockRestApi) {
+      const commits = await commitsModule.getAllCommits(owner, repo);
+      assert.equal(commits.length, 10);
+    } else {
+      this.skip();
+    }
   });
   it('Should return 8 commits when filtering', async () => {
     const commits = await getFirst10Commits();

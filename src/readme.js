@@ -1,6 +1,7 @@
-const { Octokit } = require('@octokit/rest');
+const github = require('@actions/github');
+require('dotenv').config();
 
-const octokit = new Octokit();
+const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
 
 const startTag = '<!--START_SECTION:batman-->';
 const endTag = '<!--END_SECTION:batman-->';

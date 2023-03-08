@@ -12,6 +12,7 @@
   "author": "douze <douze@users.noreply.github.com>",
   "license": "MIT",
   "devDependencies": {
+    "dotenv": "^16.0.3",
     "eslint": "^7.32.0 || ^8.2.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.2",
@@ -20,6 +21,6 @@
     "sinon": "^15.0.1"
   },
   "dependencies": {
-    "@octokit/rest": "^19.0.7"
+    "@actions/github": "^5.1.1"
   }
 }
