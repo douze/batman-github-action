@@ -2,11 +2,8 @@ const { Octokit } = require('@octokit/rest');
 
 const octokit = new Octokit();
 
-const getAllCommitsIterator = async (owner, repo, perPage = 10) => (
-  octokit.paginate.iterator(octokit.rest.repos.listCommits, { owner, repo, per_page: perPage }));
-
 const getAllCommits = async (owner, repo) => {
-  const iterator = await getAllCommitsIterator(owner, repo);
+  const iterator = await octokit.paginate.iterator(octokit.rest.repos.listCommits, { owner, repo });
 
   const allCommits = [];
   for await (const { data: commits } of iterator) {
