@@ -29,7 +29,7 @@ const getAllCommits = async (username, repo) => {
 
 const extractDates = (commits, username) => (
   commits
-    .filter((commit) => commit.author.login === username)
+    .filter((commit) => commit.author !== null && commit.author.login === username)
     .map((commit) => commit.commit.author.date));
 
 module.exports = { getAllRepos, getAllCommits, extractDates };

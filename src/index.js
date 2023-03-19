@@ -1,8 +1,21 @@
-const { getAllCommits } = require('./commits');
+const { getAllRepos, getAllCommits, extractDates } = require('./commits');
+const { groupHoursByDayNightSlots } = require('./statistics');
+const { whoAmI } = require('./batman');
 
-const run = async () => {
-  const commits = await getAllCommits('douze', 'odo');
-  console.log(commits.length);
+const getAllMyCommitDates = async (username) => {
+  const repos = await getAllRepos(username);
+  const allMyCommitDates = [];
+  for await (const repo of repos) {
+    const repoCommits = await getAllCommits(username, repo);
+    allMyCommitDates.push(...extractDates(repoCommits, username));
+  }
+  return allMyCommitDates;
 };
 
-run();
+const getIdentity = (dates) => {
+  const groupedHours = groupHoursByDayNightSlots(dates, 8, 18);
+  const identity = whoAmI(groupedHours);
+  return identity;
+};
+
+module.exports = { getAllMyCommitDates, getIdentity };
