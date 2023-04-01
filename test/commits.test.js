@@ -1,11 +1,8 @@
 const assert = require('assert');
 const sinon = require('sinon');
 const fs = require('fs/promises');
+const { mockRestApi, username, repo } = require('./env.test');
 const commitsModule = require('../src/commits');
-
-const owner = 'douze';
-const repo = 'odo';
-const mockRestApi = true;
 
 async function getFirst5Repos() {
   return ['dotfiles', 'estm', 'odo', 'Viewer', 'wade'];
@@ -31,13 +28,13 @@ describe('Commits module', () => {
     if (mockRestApi) {
       this.skip();
     } else {
-      const repos = await commitsModule.getAllRepos(owner);
+      const repos = await commitsModule.getAllRepos(username);
       assert.ok(repos.length > 0);
     }
   });
   it('Should return first 5 repos when stubing', async function () {
     if (mockRestApi) {
-      const repos = await commitsModule.getAllRepos(owner);
+      const repos = await commitsModule.getAllRepos(username);
       assert.equal(repos.length, 5);
     } else {
       this.skip();
@@ -47,13 +44,13 @@ describe('Commits module', () => {
     if (mockRestApi) {
       this.skip();
     } else {
-      const commits = await commitsModule.getAllCommits(owner, repo);
+      const commits = await commitsModule.getAllCommits(username, repo);
       assert.ok(commits.length > 0);
     }
   });
   it('Should return first 10 commits when stubing', async function () {
     if (mockRestApi) {
-      const commits = await commitsModule.getAllCommits(owner, repo);
+      const commits = await commitsModule.getAllCommits(username, repo);
       assert.equal(commits.length, 10);
     } else {
       this.skip();
@@ -61,12 +58,12 @@ describe('Commits module', () => {
   });
   it('Should return 8 commits when filtering', async () => {
     const commits = await getFirst10Commits();
-    const filteredCommits = commitsModule.extractDates(commits, owner);
+    const filteredCommits = commitsModule.extractDates(commits, username);
     assert.equal(filteredCommits.length, 8);
   });
   it('Should return commit dates', async () => {
     const commits = await getFirst10Commits();
-    const filteredCommits = commitsModule.extractDates(commits, owner);
+    const filteredCommits = commitsModule.extractDates(commits, username);
     const expectedDates = [
       '2023-01-10T13:45:43Z',
       '2023-01-06T14:06:02Z',

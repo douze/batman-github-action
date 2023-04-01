@@ -1,10 +1,9 @@
 const assert = require('assert');
 const sinon = require('sinon');
 const fs = require('fs/promises');
+const { mockRestApi, username } = require('./env.test');
 const readmeModule = require('../src/readme');
 
-const owner = 'douze';
-const repo = 'douze';
 const { startTag, endTag } = readmeModule;
 
 async function getProfileReadme() {
@@ -18,19 +17,27 @@ async function getRawProfileReadme() {
 
 describe('Readme module', () => {
   beforeEach(() => {
-    sinon.stub(readmeModule, 'getReadme').callsFake(getProfileReadme);
+    if (mockRestApi) {
+      sinon.stub(readmeModule, 'getReadme').callsFake(getProfileReadme);
+    }
   });
   afterEach(() => {
-    sinon.restore();
+    if (mockRestApi) {
+      sinon.restore();
+    }
   });
-  it('Should return readme file', async () => {
-    const readme = await readmeModule.getReadme(owner, repo);
-    assert.match(readme, /Hi there/);
+  it('Should return readme file', async function () {
+    if (mockRestApi) {
+      this.skip();
+    } else {
+      const readme = await readmeModule.getReadmeContent(username);
+      assert.match(readme.content, /Hi there/);
+    }
   });
   it('Should update readme file', async () => {
     const readme = await getRawProfileReadme();
     const newContent = 'Hello world';
-    const newReadme = readmeModule.updateReadme(readme, newContent);
+    const newReadme = readmeModule.updateReadmeContent(readme, newContent);
     assert.match(newReadme, new RegExp(`${startTag}\n${newContent}\n${endTag}`));
   });
 });

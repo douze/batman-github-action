@@ -1,10 +1,10 @@
+const core = require('@actions/core');
 const github = require('@actions/github');
-require('dotenv').config();
 
-const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
+const octokit = github.getOctokit(core.getInput('githubToken'));
 
 const getAllRepos = async (username) => {
-  const iterator = await octokit.paginate.iterator(octokit.rest.repos.listForUser, { username });
+  const iterator = octokit.paginate.iterator(octokit.rest.repos.listForUser, { username });
 
   const allRepos = [];
   for await (const { data: repos } of iterator) {
@@ -16,7 +16,8 @@ const getAllRepos = async (username) => {
 };
 
 const getAllCommits = async (username, repo) => {
-  const iterator = await octokit.paginate.iterator(octokit.rest.repos.listCommits, { owner: username, repo });
+  // eslint-disable-next-line max-len
+  const iterator = octokit.paginate.iterator(octokit.rest.repos.listCommits, { owner: username, repo });
 
   const allCommits = [];
   for await (const { data: commits } of iterator) {

@@ -20,6 +20,9 @@ describe('Batman module', () => {
     ];
     const groupedHours = statisticsModule.groupHoursByDayNightSlots(dates, 8, 18);
     const result = batmanModule.whoAmI(groupedHours);
-    assert.deepEqual(result, { identity: Identity.BATMAN, percentageByDay: 40, percentageByNight: 60 });
+    assert.deepEqual(
+      result,
+      { identity: Identity.BATMAN, percentageByDay: 40, percentageByNight: 60 },
+    );
   });
 });

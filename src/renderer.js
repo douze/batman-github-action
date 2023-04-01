@@ -1,4 +1,4 @@
-const renderAsPercentageCircle = (identity, percentageByDay) => {
+const renderAsPercentageCircle = (identityDescription, percentageByDay) => {
   // Circle formula: perimeter = 2*PI*radius
   // radius = perimeter / 2 / PI
   const svgSize = 200;
@@ -14,7 +14,7 @@ const renderAsPercentageCircle = (identity, percentageByDay) => {
     d="M${x} ${y} a ${radius} ${radius} 0 0 1 0 ${diameter} a ${radius} ${radius} 0 0 1 0 -${diameter}"/>
   <path fill="none" stroke="#f18e3c" stroke-width="${strokeWith}" stroke-dasharray="0 ${percentageByDay * 0.01 * perimeter} ${perimeter}"
     d="M${x} ${y} a ${radius} ${radius} 0 0 1 0 ${diameter} a ${radius} ${radius} 0 0 1 0 -${diameter}"/>
-  <text x="100" y="100" alignment-baseline="central" text-anchor="middle">${identity.toUpperCase()}</text>
+  <text x="100" y="100" alignment-baseline="central" text-anchor="middle">${identityDescription.toUpperCase()}</text>
 </svg>
 `;
 };

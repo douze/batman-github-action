@@ -1,19 +1,22 @@
 const assert = require('assert');
-
-const { getAllMyCommitDates, getIdentity } = require('../src/index');
-
-const runIntegrationTest = false;
+const { runIntegrationTest, updateReadMe, username } = require('./env.test');
+const { Identity } = require('../src/batman');
+const indexModule = require('../src/index');
 
 describe('Index module (integration)', function () {
   this.timeout(10000);
 
   it('Should... works', async function () {
     if (runIntegrationTest) {
-      const username = 'douze';
-      const myCommitDates = await getAllMyCommitDates(username);
+      const myCommitDates = await indexModule.getAllMyCommitDates(username);
       assert.ok(myCommitDates.length > 80);
-      const identity = getIdentity(myCommitDates);
-      assert.ok(identity.identity !== undefined);
+      const { identity, percentageByDay } = indexModule.getIdentityWithStatistics(myCommitDates);
+      assert.ok(identity !== undefined);
+      const newReadMe = await indexModule.updateProfileReadme(username, identity, percentageByDay, updateReadMe);
+      assert.ok(
+        newReadMe.toLowerCase().indexOf(Identity.BATMAN.description.toLowerCase()) !== -1
+        || newReadMe.toLowerCase().indexOf(Identity.BRUCE_WAYNE.description.toLowerCase()) !== -1,
+      );
     } else {
       this.skip();
     }
