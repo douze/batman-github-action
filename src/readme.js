@@ -25,21 +25,59 @@ const updateReadmeContent = (readme, content) => {
   ].join('');
 };
 
-const updateReadme = async (username, sha, readMeContent) => {
-  octokit.rest.repos.createOrUpdateFileContents({
+const updateSvgAndReadme = async (username, svg, readme, percentageByDay) => {
+  const svgBlob = await octokit.rest.git.createBlob({
     owner: username,
     repo: username,
-    path: 'README.md',
-    message: 'Update README from batman-github-action',
-    content: Buffer.from(readMeContent).toString('base64'),
-    sha,
+    content: svg,
+  });
+  const readMeBlob = await octokit.rest.git.createBlob({
+    owner: username,
+    repo: username,
+    content: readme,
+  });
+  const tree = await octokit.rest.git.createTree({
+    owner: username,
+    repo: username,
+    tree: [
+      {
+        path: 'image.svg',
+        mode: '100644',
+        type: 'blob',
+        sha: svgBlob.data.sha,
+      },
+      {
+        path: 'README.md',
+        mode: '100644',
+        type: 'blob',
+        sha: readMeBlob.data.sha,
+      },
+    ],
+  });
+  const ref = await octokit.rest.git.getRef({
+    owner: username,
+    repo: username,
+    ref: 'heads/main',
+  });
+  const commit = await octokit.rest.git.createCommit({
+    owner: username,
+    repo: username,
+    message: `Update README from batman-github-action ${percentageByDay.toFixed(2)}/${100 - percentageByDay.toFixed(2)}`,
+    tree: tree.data.sha,
+    parents: [ref.data.object.sha],
+  });
+  octokit.rest.git.updateRef({
+    owner: username,
+    repo: username,
+    ref: ref.data.ref.slice(5),
+    sha: commit.data.sha,
   });
 };
 
 module.exports = {
   getReadme,
   updateReadmeContent,
-  updateReadme,
+  updateSvgAndReadme,
   startTag,
   endTag,
 };

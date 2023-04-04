@@ -8,8 +8,8 @@ Object.assign(process.env, {
 
 module.exports = {
   mockRestApi: true,
-  runIntegrationTest: false,
-  updateReadMe: false,
+  runIntegrationTest: true,
+  updateReadMe: true,
   username: 'douze',
   repo: 'odo',
 };

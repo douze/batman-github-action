@@ -1,7 +1,7 @@
 const { getAllRepos, getAllCommits, extractDates } = require('./commits');
 const { groupHoursByDayNightSlots } = require('./statistics');
 const { whoAmI } = require('./batman');
-const { getReadme, updateReadmeContent, updateReadme } = require('./readme');
+const { getReadme, updateReadmeContent, updateSvgAndReadme } = require('./readme');
 const { renderAsPercentageCircle } = require('./renderer');
 
 const getAllMyCommitDates = async (username) => {
@@ -22,9 +22,9 @@ const getIdentityWithStatistics = (dates) => {
 const updateProfileReadme = async (username, identity, percentageByDay, update = false) => {
   const readme = await getReadme(username);
   const svg = renderAsPercentageCircle(identity.description, percentageByDay);
-  const udpatedReadme = updateReadmeContent(readme.content, identity.description);
+  const udpatedReadme = updateReadmeContent(readme.content, '<img src="./image.svg">');
   if (update) {
-    updateReadme(username, readme.sha, udpatedReadme);
+    updateSvgAndReadme(username, svg, udpatedReadme, percentageByDay);
   }
   return udpatedReadme;
 };

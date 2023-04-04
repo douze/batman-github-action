@@ -12,6 +12,7 @@ describe('Index module (integration)', function () {
       assert.ok(myCommitDates.length > 80);
       const { identity, percentageByDay } = indexModule.getIdentityWithStatistics(myCommitDates);
       assert.ok(identity !== undefined);
+      // eslint-disable-next-line max-len
       const newReadMe = await indexModule.updateProfileReadme(username, identity, percentageByDay, updateReadMe);
       assert.ok(
         newReadMe.toLowerCase().indexOf(Identity.BATMAN.description.toLowerCase()) !== -1
