@@ -1,7 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
-const octokit = github.getOctokit(core.getInput('githubToken'));
+const octokit = github.getOctokit(core.getInput('github_token'));
 
 const startTag = '<!--START_SECTION:batman-->';
 const endTag = '<!--END_SECTION:batman-->';

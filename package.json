@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "lint": "eslint .",
-    "coverage": "nyc --reporter=html mocha",
-    "build": "ncc build index.js -o dist"
+    "lint": "eslint src/ test/",
+    "jlint": "eslint src/ test/ --format json --output-file=coverage/eslint.json",
+    "coverage": "nyc --reporter=html --reporter=json-summary mocha",
+    "build": "ncc build src/index.js -o dist"
   },
   "keywords": [],
   "author": "douze <douze@users.noreply.github.com>",
@@ -23,6 +24,7 @@
   },
   "dependencies": {
     "@actions/core": "^1.10.0",
-    "@actions/github": "^5.1.1"
+    "@actions/github": "^5.1.1",
+    "badge-maker": "^3.3.1"
   }
 }

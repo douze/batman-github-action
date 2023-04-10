@@ -3,7 +3,7 @@ const DayNight = Object.freeze({
   NIGHT: Symbol('Night'),
 });
 
-const convertISODateToLocalHour = (date) => new Date(date).getHours();
+const extractUTCHour = (date) => new Date(date).getUTCHours();
 
 const hourToDayNightKey = (hour, dayStart, dayEnd) => (
   dayStart <= hour && hour < dayEnd ? DayNight.DAY : DayNight.NIGHT);
@@ -11,7 +11,7 @@ const hourToDayNightKey = (hour, dayStart, dayEnd) => (
 /* eslint-disable no-param-reassign */
 const groupHoursByDayNightSlots = (dates, localDayStart, localDayEnd) => (
   dates.reduce((group, date) => {
-    const hour = convertISODateToLocalHour(date);
+    const hour = extractUTCHour(date);
     const dayNightKey = hourToDayNightKey(hour, localDayStart, localDayEnd);
     group[dayNightKey] = group[dayNightKey] || [];
     group[dayNightKey].push(hour);
@@ -21,6 +21,6 @@ const groupHoursByDayNightSlots = (dates, localDayStart, localDayEnd) => (
 
 module.exports = {
   DayNight,
-  convertISODateToLocalHour,
+  extractUTCHour,
   groupHoursByDayNightSlots,
 };

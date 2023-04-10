@@ -30,7 +30,7 @@ describe('Readme module', () => {
     if (mockRestApi) {
       this.skip();
     } else {
-      const readme = await readmeModule.getReadmeContent(username);
+      const readme = await readmeModule.getReadme(username);
       assert.match(readme.content, /Hi there/);
     }
   });

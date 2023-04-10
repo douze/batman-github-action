@@ -1,5 +1,11 @@
 const assert = require('assert');
-const { runIntegrationTest, updateReadMe, username } = require('./env.test');
+const {
+  runIntegrationTest,
+  updateReadMe,
+  username,
+  dayStart,
+  dayEnd,
+} = require('./env.test');
 const { Identity } = require('../src/batman');
 const indexModule = require('../src/index');
 
@@ -10,7 +16,8 @@ describe('Index module (integration)', function () {
     if (runIntegrationTest) {
       const myCommitDates = await indexModule.getAllMyCommitDates(username);
       assert.ok(myCommitDates.length > 80);
-      const { identity, percentageByDay } = indexModule.getIdentityWithStatistics(myCommitDates);
+      // eslint-disable-next-line max-len
+      const { identity, percentageByDay } = indexModule.getIdentityWithStatistics(myCommitDates, dayStart, dayEnd);
       assert.ok(identity !== undefined);
       // eslint-disable-next-line max-len
       const newReadMe = await indexModule.updateProfileReadme(username, identity, percentageByDay, updateReadMe);

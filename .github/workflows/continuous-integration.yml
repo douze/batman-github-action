@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7.1.6
+      - name: Install dependencies
+        run: pnpm install
+      - name: Generate badges
+        run: |
+          pnpm run coverage
+          pnpm run jlint
+          node .github/badges.js
+          git config --global user.name "batman-github-action"
+          git config --global user.email "batman-github-action@users.noreply.github.com"
+          git add .github/*.svg
+          git commit -m "Update badges"
+          git push
+        env:
+          INPUT_GITHUB_TOKEN: ${{ secrets.BATMAN_GITHUB_ACTION_SECRET }}

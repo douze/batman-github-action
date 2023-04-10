@@ -1,7 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
-const octokit = github.getOctokit(core.getInput('githubToken'));
+const octokit = github.getOctokit(core.getInput('github_token'));
 
 const getAllRepos = async (username) => {
   const iterator = octokit.paginate.iterator(octokit.rest.repos.listForUser, { username });

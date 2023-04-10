@@ -1,15 +1,18 @@
 const INPUT_MOCK = {
-  INPUT_USERNAME: 'douze',
+  INPUT_USERNAME_ID: 'douze',
 };
 
 Object.assign(process.env, {
   ...INPUT_MOCK,
+  TEST: true,
 });
 
 module.exports = {
-  mockRestApi: true,
+  mockRestApi: false,
   runIntegrationTest: true,
-  updateReadMe: true,
+  updateReadMe: false,
   username: 'douze',
   repo: 'odo',
+  dayStart: 8,
+  dayEnd: 18,
 };

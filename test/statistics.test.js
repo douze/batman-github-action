@@ -11,8 +11,8 @@ describe('Statistics module', () => {
       '2023-02-05T12:41:01Z',
       '2023-02-07T09:18:28Z',
     ];
-    const hours = dates.map((date) => statisticsModule.convertISODateToLocalHour(date));
-    assert.deepEqual(hours, [14, 15, 13, 10]);
+    const hours = dates.map((date) => statisticsModule.extractUTCHour(date));
+    assert.deepEqual(hours, [13, 14, 12, 9]);
   });
   it('Should group hours by day/night slots', () => {
     const dates = [
@@ -28,7 +28,7 @@ describe('Statistics module', () => {
       '2023-02-07T22:18:28Z',
     ];
     const groupedHours = statisticsModule.groupHoursByDayNightSlots(dates, 8, 18);
-    assert.deepEqual(groupedHours[DAY], [14, 17, 15, 13, 10]);
-    assert.deepEqual(groupedHours[NIGHT], [19, 22, 7, 20, 23]);
+    assert.deepEqual(groupedHours[DAY], [13, 16, 14, 12, 9]);
+    assert.deepEqual(groupedHours[NIGHT], [18, 21, 6, 19, 22]);
   });
 });
