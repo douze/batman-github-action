@@ -21,10 +21,12 @@ jobs:
           pnpm run coverage
           pnpm run jlint
           node .github/badges.js
-          git config --global user.name "batman-github-action"
-          git config --global user.email "batman-github-action@users.noreply.github.com"
-          git add .github/*.svg
-          git commit -m "Update badges"
-          git push
+          if [[ `git status --porcelain` ]]; then
+            git config --global user.name "batman-github-action"
+            git config --global user.email "batman-github-action@users.noreply.github.com"
+            git add .github/*.svg
+            git commit -m "[batman-github-action] Update badges"
+            git push
+          fi
         env:
           INPUT_GITHUB_TOKEN: ${{ secrets.BATMAN_GITHUB_ACTION_SECRET }}
