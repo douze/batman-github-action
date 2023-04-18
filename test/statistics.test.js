@@ -4,7 +4,7 @@ const statisticsModule = require('../src/statistics');
 const { DAY, NIGHT } = statisticsModule.DayNight;
 
 describe('Statistics module', () => {
-  it('Should extract local hours from ISO dates', () => {
+  it('Should extract UTC hours from ISO dates', () => {
     const dates = [
       '2023-02-01T13:45:43Z',
       '2023-02-03T14:06:02Z',
@@ -13,6 +13,12 @@ describe('Statistics module', () => {
     ];
     const hours = dates.map((date) => statisticsModule.extractUTCHour(date));
     assert.deepEqual(hours, [13, 14, 12, 9]);
+  });
+  it('Should convert local hours to UTC jours', () => {
+    const localHour = '8';
+    const utcHour = statisticsModule.convertLocalToUTCHour(localHour);
+    const timezeoneOffset = new Date().getTimezoneOffset() / 60; // min to hour
+    assert.equal(utcHour, +localHour + +timezeoneOffset);
   });
   it('Should group hours by day/night slots', () => {
     const dates = [
@@ -27,8 +33,20 @@ describe('Statistics module', () => {
       '2023-02-07T19:18:28Z',
       '2023-02-07T22:18:28Z',
     ];
-    const groupedHours = statisticsModule.groupHoursByDayNightSlots(dates, 8, 18);
-    assert.deepEqual(groupedHours[DAY], [13, 16, 14, 12, 9]);
-    assert.deepEqual(groupedHours[NIGHT], [18, 21, 6, 19, 22]);
+    const localDayStart = 8;
+    const localDayEnd = 18;
+    const dayStart = statisticsModule.convertLocalToUTCHour(localDayStart);
+    const dayEnd = statisticsModule.convertLocalToUTCHour(localDayEnd);
+    const groupedHoursDay = [];
+    const groupedHoursNight = [];
+    // eslint-disable-next-line max-len
+    const groupedHours = statisticsModule.groupHoursByDayNightSlots(dates, localDayStart, localDayEnd);
+    dates.forEach((date) => {
+      const hour = statisticsModule.extractUTCHour(date);
+      if (dayStart <= hour && hour < dayEnd) groupedHoursDay.push(hour);
+      else groupedHoursNight.push(hour);
+    });
+    assert.deepEqual(groupedHours[DAY], groupedHoursDay);
+    assert.deepEqual(groupedHours[NIGHT], groupedHoursNight);
   });
 });
