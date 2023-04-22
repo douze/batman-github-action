@@ -10,9 +10,9 @@ const renderAsPercentageCircle = (identityDescription, percentageByDay) => {
   const strokeWith = svgSize * 0.05;
   return `
 <svg width="${svgSize}px" height="${svgSize}px" xmlns="http://www.w3.org/2000/svg">
-  <path fill="none" stroke="#2153b1" stroke-width="${strokeWith}" stroke-dasharray="${percentageByDay * 0.01 * perimeter} ${perimeter}"
+  <path fill="none" stroke="#f18e3c" stroke-width="${strokeWith}" stroke-dasharray="${percentageByDay * 0.01 * perimeter} ${perimeter}"
     d="M${x} ${y} a ${radius} ${radius} 0 0 1 0 ${diameter} a ${radius} ${radius} 0 0 1 0 -${diameter}"/>
-  <path fill="none" stroke="#f18e3c" stroke-width="${strokeWith}" stroke-dasharray="0 ${percentageByDay * 0.01 * perimeter} ${perimeter}"
+  <path fill="none" stroke="#2153b1" stroke-width="${strokeWith}" stroke-dasharray="0 ${percentageByDay * 0.01 * perimeter} ${perimeter}"
     d="M${x} ${y} a ${radius} ${radius} 0 0 1 0 ${diameter} a ${radius} ${radius} 0 0 1 0 -${diameter}"/>
   <text x="100" y="100" alignment-baseline="central" text-anchor="middle">${identityDescription.toUpperCase()}</text>
 </svg>
