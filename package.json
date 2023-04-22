@@ -1,6 +1,6 @@
 {
   "name": "batman-github-action",
-  "version": "1.0",
+  "version": "1.1",
   "description": "Github action used to retrived coding time by day & by night",
   "main": "index.js",
   "scripts": {
