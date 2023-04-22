@@ -33,4 +33,10 @@ Updated profile README, with circle svg & identity (Batman or BruceWayne).
 
 ## Example usage
 
-TODO
+```yaml
+uses: douze/batman-github-action@v1.1
+with:
+    username_id: 'douze'
+    day_start: '8'
+    day_end: '18'
+```
