@@ -5,7 +5,7 @@
 ![continuous integration](https://img.shields.io/github/actions/workflow/status/douze/batman-github-action/continuous-integration.yml)
 ![coverage](.github/coverage.svg)
 ![lint](.github/lint.svg)
-
+![status](https://img.shields.io/badge/status-inative-yellowgreen)
 
 **Batman** is a **GitHub Action** used to update your profile README. Depending on your commit history dates, it'll output Batman or BruceWayne.
 
